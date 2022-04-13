@@ -1,0 +1,50 @@
+ports:
+  - port: 8065
+    onOpen: open-browser
+
+tasks:
+  - name: Server
+    before: |
+      clear
+      cd mattermost-server
+    init: |
+      go run ./build/docker-compose-generator/main.go postgres minio | docker-compose -f docker-compose.makefile.yml pull
+      go mod tidy
+    command: |
+      export MM_SERVICESETTINGS_SITEURL=$(echo $GITPOD_WORKSPACE_URL | cut -c 9-200)
+      make run
+    env:
+      ENABLED_DOCKER_SERVICES: postgres minio
+
+  - name: Webapp
+    before: |
+      clear
+      cd mattermost-webapp
+    init: |
+      nvm install v16.4.0
+      nvm alias default v16.4.0
+      npm i
+      make build
+    command: |
+      make run
+    openMode: split-right
+
+  - name: Dev
+    env:
+      MM_SERVICESETTINGS_SITEURL: http://localhost:8065
+    before: clear
+    init: |
+      echo "Installing dependencies! You can check the progress of each in the tabs to the right."
+      echo ""
+    command: |
+      gp await-port 8065
+      echo "Server is running at $(echo $GITPOD_WORKSPACE_URL | cut -c 9-200)"
+
+github:
+  prebuilds:
+    master: true
+    pullRequests: true
+
+vscode:
+  extensions:
+    - golang.go
