@@ -10,20 +10,20 @@ tasks:
   - name: Server
     before: |
       clear
-      cd mattermost-server
+      cd ../mattermost-server
     init: |
       go run ./build/docker-compose-generator/main.go postgres minio | docker-compose -f docker-compose.makefile.yml pull
       go mod tidy
     command: |
       export MM_SERVICESETTINGS_SITEURL=$(echo $GITPOD_WORKSPACE_URL | cut -c 9-200)
-      make run
+      make run-server
     env:
       ENABLED_DOCKER_SERVICES: postgres minio
 
   - name: Webapp
     before: |
       clear
-      cd mattermost-webapp
+      cd ../mattermost-webapp
     init: |
       nvm install v16.4.0
       nvm alias default v16.4.0
