@@ -34,6 +34,7 @@ tasks:
       make build
     command: |
       nvm use v16.4.0
+      npm i
       make run
     openMode: split-right
 
