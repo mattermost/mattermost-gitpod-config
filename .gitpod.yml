@@ -25,6 +25,11 @@ tasks:
       clear
       cd ../mattermost-webapp
     init: |
+      mkdir dist
+      cd ../mattermost-server
+      ln -nfs ../mattermost-webapp/dist client
+      cd ../mattermost-webapp
+
       nvm install v16.4.0
       nvm alias default v16.4.0
       npm i
