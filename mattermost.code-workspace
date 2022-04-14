@@ -1,0 +1,14 @@
+{
+    "folders": [
+        {
+            "path": "."
+        },
+        {
+            "path": "../mattermost-server"
+        },
+        {
+            "path": "../mattermost-webapp"
+        }
+    ],
+    "settings": {}
+}

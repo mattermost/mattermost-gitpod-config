@@ -52,3 +52,6 @@ github:
 vscode:
   extensions:
     - golang.go
+
+workspaceLocation:
+  mattermost-gitpod-config/mattermost.code-workspace
