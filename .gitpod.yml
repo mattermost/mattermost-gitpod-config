@@ -13,9 +13,9 @@ tasks:
       cd ../mattermost-server
     init: |
       go run ./build/docker-compose-generator/main.go postgres minio | docker-compose -f docker-compose.makefile.yml pull
-      go mod tidy
+      go mod download
     command: |
-      export MM_SERVICESETTINGS_SITEURL=$(echo $GITPOD_WORKSPACE_URL | cut -c 9-200)
+      export MM_SERVICESETTINGS_SITEURL=$(gp url 8065)
       make run-server
     env:
       ENABLED_DOCKER_SERVICES: postgres minio
@@ -42,7 +42,7 @@ tasks:
       echo ""
     command: |
       gp await-port 8065
-      echo "Server is running at $(echo $GITPOD_WORKSPACE_URL | cut -c 9-200)"
+      echo "Server is running at $(gp url 8065)"
 
 github:
   prebuilds:
