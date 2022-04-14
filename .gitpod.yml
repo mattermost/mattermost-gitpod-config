@@ -1,3 +1,7 @@
+additionalRepositories:
+  - url: https://github.com/mattermost/mattermost-server
+  - url: https://github.com/mattermost/mattermost-webapp
+
 ports:
   - port: 8065
     onOpen: open-browser
@@ -6,21 +10,26 @@ tasks:
   - name: Server
     before: |
       clear
-      cd mattermost-server
+      cd ../mattermost-server
     init: |
       go run ./build/docker-compose-generator/main.go postgres minio | docker-compose -f docker-compose.makefile.yml pull
-      go mod tidy
+      go mod download
     command: |
-      export MM_SERVICESETTINGS_SITEURL=$(echo $GITPOD_WORKSPACE_URL | cut -c 9-200)
-      make run
+      export MM_SERVICESETTINGS_SITEURL=$(gp url 8065)
+      make run-server
     env:
       ENABLED_DOCKER_SERVICES: postgres minio
 
   - name: Webapp
     before: |
       clear
-      cd mattermost-webapp
+      cd ../mattermost-webapp
     init: |
+      mkdir dist
+      cd ../mattermost-server
+      ln -nfs ../mattermost-webapp/dist client
+      cd ../mattermost-webapp
+
       nvm install v16.4.0
       nvm alias default v16.4.0
       npm i
@@ -38,7 +47,7 @@ tasks:
       echo ""
     command: |
       gp await-port 8065
-      echo "Server is running at $(echo $GITPOD_WORKSPACE_URL | cut -c 9-200)"
+      echo "Server is running at $(gp url 8065)"
 
 github:
   prebuilds:
@@ -48,3 +57,6 @@ github:
 vscode:
   extensions:
     - golang.go
+
+workspaceLocation:
+  mattermost-gitpod-config/mattermost.code-workspace
