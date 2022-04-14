@@ -1,3 +1,7 @@
+additionalRepositories:
+  - url: https://github.com/mattermost/mattermost-server
+  - url: https://github.com/mattermost/mattermost-webapp
+
 ports:
   - port: 8065
     onOpen: open-browser
