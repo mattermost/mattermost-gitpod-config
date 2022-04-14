@@ -9,7 +9,6 @@ ports:
 tasks:
   - name: Server
     before: |
-      clear
       cd ../mattermost-server
     init: |
       go run ./build/docker-compose-generator/main.go postgres minio | docker-compose -f docker-compose.makefile.yml pull
@@ -22,7 +21,6 @@ tasks:
 
   - name: Webapp
     before: |
-      clear
       cd ../mattermost-webapp
     init: |
       mkdir dist
@@ -35,6 +33,8 @@ tasks:
       npm i
       make build
     command: |
+      nvm use v16.4.0
+      npm i
       make run
     openMode: split-right
 
