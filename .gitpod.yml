@@ -16,7 +16,6 @@ tasks:
       echo ""
     command: |
       ./input-github-username.sh
-      ./set-origin-remotes-to-forks.sh
       gp await-port 8065
       echo "Server is running at $(gp url 8065)"
 
@@ -50,7 +49,6 @@ tasks:
       nvm use v16.4.0
       npm i
       make run
-    openMode: split-right
 
 github:
   prebuilds:

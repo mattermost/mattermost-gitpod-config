@@ -8,8 +8,6 @@ if test ! -v GITHUB_USERNAME; then {
   eval $(gp env -e);
 } fi
 
-git -C /workspace/mattermost-gitpod-config remote add upstream https://github.com/mattermost/mattermost-gitpod-config.git
-git -C /workspace/mattermost-gitpod-config remote set-url origin https://github.com/${GITHUB_USERNAME}/mattermost-gitpod-config.git
 
 git -C /workspace/mattermost-server remote add upstream https://github.com/mattermost/mattermost-server.git
 git -C /workspace/mattermost-server remote set-url origin https://github.com/${GITHUB_USERNAME}/mattermost-server.git
