@@ -25,6 +25,16 @@ tasks:
       make run-server MM_NO_DOCKER=true
     env:
       ENABLED_DOCKER_SERVICES: postgres minio
+      MM_SERVICESETTINGS_ENABLELOCALMODE: true
+      MM_SERVICESETTINGS_ENABLEBOTACCOUNTCREATION: true
+      MM_SERVICESETTINGS_ENABLEOAUTHSERVICEPROVIDER: true
+      MM_SERVICESETTINGS_ENABLEDEVELOPER: true
+      MM_SERVICESETTINGS_ENABLETESTING: true
+      MM_PLUGINSETTINGS_AUTOMATICPREPACKAGEDPLUGINS: true
+      MM_PLUGINSETTINGS_ENABLEUPLOADS: true
+      MM_FEATUREFLAGS_AppsEnabled: true
+      MM_LOGSETTINGS_CONSOLELEVEL: DEBUG
+      MM_LOGSETTINGS_FILELEVEL: DEBUG
 
   - name: Webapp
     before: |
@@ -46,16 +56,13 @@ tasks:
       make run
     openMode: split-right
 
-  - name: Dev
-    env:
-      MM_SERVICESETTINGS_SITEURL: http://localhost:8065
-    before: clear
+  - name: Plugin
     init: |
-      echo "Installing dependencies! You can check the progress of each in the tabs to the right."
-      echo ""
+      source ./scripts/init-plugin-project.sh
     command: |
       gp await-port 8065
       echo "Server is running at $(gp url 8065)"
+      source ./scripts/run-plugin-project.sh
 
 github:
   prebuilds:
