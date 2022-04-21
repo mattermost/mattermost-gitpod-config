@@ -58,11 +58,11 @@ tasks:
 
   - name: Plugin
     init: |
-      source ./scripts/init-plugin-project.sh
+      source /workspace/mattermost-gitpod-config/scripts/init-plugin-project.sh
     command: |
       gp await-port 8065
       echo "Server is running at $(gp url 8065)"
-      source ./scripts/run-plugin-project.sh
+      source /workspace/mattermost-gitpod-config/scripts/run-plugin-project.sh
 
 github:
   prebuilds:
