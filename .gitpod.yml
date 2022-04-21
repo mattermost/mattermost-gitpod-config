@@ -15,7 +15,7 @@ tasks:
       echo "Installing dependencies! You can check the progress of each in the tabs to the right."
       echo ""
     command: |
-      ./input_github_username.sh§
+      ./input_github_username.sh
       gp await-port 8065
       echo "Server is running at $(gp url 8065)"
 
