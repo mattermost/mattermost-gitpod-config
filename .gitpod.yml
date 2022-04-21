@@ -7,6 +7,18 @@ ports:
     onOpen: open-browser
 
 tasks:
+  - name: Dev
+    env:
+      MM_SERVICESETTINGS_SITEURL: http://localhost:8065
+    before: clear
+    init: |
+      echo "Installing dependencies! You can check the progress of each in the tabs to the right."
+      echo ""
+    command: |
+      ./input_github_username.sh§
+      gp await-port 8065
+      echo "Server is running at $(gp url 8065)"
+
   - name: Server
     before: |
       cd ../mattermost-server
@@ -38,17 +50,6 @@ tasks:
       npm i
       make run
     openMode: split-right
-
-  - name: Dev
-    env:
-      MM_SERVICESETTINGS_SITEURL: http://localhost:8065
-    before: clear
-    init: |
-      echo "Installing dependencies! You can check the progress of each in the tabs to the right."
-      echo ""
-    command: |
-      gp await-port 8065
-      echo "Server is running at $(gp url 8065)"
 
 github:
   prebuilds:
