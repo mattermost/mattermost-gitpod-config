@@ -7,18 +7,6 @@ ports:
     onOpen: open-browser
 
 tasks:
-  - name: Dev
-    env:
-      MM_SERVICESETTINGS_SITEURL: http://localhost:8065
-    before: clear
-    init: |
-      echo "Installing dependencies! You can check the progress of each in the tabs to the right."
-      echo ""
-    command: |
-      ./input-github-username.sh
-      gp await-port 8065
-      echo "Server is running at $(gp url 8065)"
-
   - name: Server
     before: |
       cd ../mattermost-server
@@ -49,6 +37,19 @@ tasks:
       nvm use v16.4.0
       npm i
       make run
+
+  - name: Dev
+    env:
+      MM_SERVICESETTINGS_SITEURL: http://localhost:8065
+    before: clear
+    init: |
+      echo "Installing dependencies! You can check the progress of each in the tabs to the right."
+      echo ""
+    command: |
+      ./input-github-username.sh
+      gp await-port 8065
+      echo "Server is running at $(gp url 8065)"
+
 
 github:
   prebuilds:
