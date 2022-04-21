@@ -1,4 +1,3 @@
-#!/bin/bash
 echo Hello World!
 set -u;
 if ! gp env | grep -q 'GITHUB_USERNAME'; then {
