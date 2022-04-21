@@ -10,9 +10,15 @@ tasks:
   - name: Server
     before: |
       cd ../mattermost-server
+      export MM_SERVICESETTINGS_SITEURL=$(gp url 8065)
     init: |
       go run ./build/docker-compose-generator/main.go postgres minio | docker-compose -f docker-compose.makefile.yml pull
-      go install ./cmd/mattermost
+      go run ./build/docker-compose-generator/main.go postgres minio | docker-compose -f docker-compose.makefile.yml -f /dev/stdin run -T --rm start_dependencies
+      make run-server MM_NO_DOCKER=true
+      gp await-port 8065
+      make stop-server
+      go run ./build/docker-compose-generator/main.go postgres minio | docker-compose -f docker-compose.makefile.yml -f /dev/stdin stop
+
     command: |
       export MM_SERVICESETTINGS_SITEURL=$(gp url 8065)
       go run ./build/docker-compose-generator/main.go postgres minio | docker-compose -f docker-compose.makefile.yml -f /dev/stdin run -T --rm start_dependencies
@@ -23,6 +29,7 @@ tasks:
   - name: Webapp
     before: |
       cd ../mattermost-webapp
+      export MM_SERVICESETTINGS_SITEURL=$(gp url 8065)
     init: |
       mkdir dist
       cd ../mattermost-server
