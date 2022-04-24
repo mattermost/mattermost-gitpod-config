@@ -7,3 +7,5 @@ if ! gp env | grep -q 'GITHUB_USERNAME'; then {
 if test ! -v GITHUB_USERNAME; then {
   eval $(gp env -e);
 } fi
+
+. ./set-origin-remotes-to-forks.sh
