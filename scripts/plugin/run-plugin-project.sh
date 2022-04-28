@@ -10,5 +10,4 @@ fi
 
 cd /workspace/$_repo
 
-nvm install v13.14.0
 MM_SERVICESETTINGS_ENABLEDEVELOPER=true make deploy

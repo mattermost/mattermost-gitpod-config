@@ -17,7 +17,6 @@ cd /workspace
 git clone $_cloneURL
 cd $_repo
 
-node /workspace/mattermost-gitpod-config/scripts/add-workspace-folder.js $_repo
+node /workspace/mattermost-gitpod-config/scripts/common/add-workspace-folder.js $_repo
 
-nvm install v13.14.0
 MM_SERVICESETTINGS_ENABLEDEVELOPER=true make dist

@@ -33,6 +33,7 @@ tasks:
       MM_PLUGINSETTINGS_AUTOMATICPREPACKAGEDPLUGINS: true
       MM_PLUGINSETTINGS_ENABLEUPLOADS: true
       MM_FEATUREFLAGS_AppsEnabled: true
+      MM_FEATUREFLAGS_AppBarEnabled: true
       MM_LOGSETTINGS_CONSOLELEVEL: DEBUG
       MM_LOGSETTINGS_FILELEVEL: DEBUG
 
@@ -58,11 +59,13 @@ tasks:
 
   - name: Plugin
     init: |
-      source /workspace/mattermost-gitpod-config/scripts/init-plugin-project.sh
+      source /workspace/mattermost-gitpod-config/scripts/plugin/init-plugin-project.sh
     command: |
       gp await-port 8065
       echo "Server is running at $(gp url 8065)"
-      source /workspace/mattermost-gitpod-config/scripts/run-plugin-project.sh
+      source /workspace/mattermost-gitpod-config/scripts/plugin/run-plugin-project.sh
+    env:
+      MM_SERVICESETTINGS_ENABLEDEVELOPER: true
 
 github:
   prebuilds:
