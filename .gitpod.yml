@@ -67,6 +67,12 @@ tasks:
     env:
       MM_SERVICESETTINGS_ENABLEDEVELOPER: true
 
+  - name: App
+    init: |
+      source /workspace/mattermost-gitpod-config/scripts/app/init-app-project.sh
+    command: |
+      source /workspace/mattermost-gitpod-config/scripts/app/run-app-project.sh
+
 github:
   prebuilds:
     master: true
