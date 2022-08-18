@@ -6,6 +6,21 @@ ports:
   - port: 8065
     onOpen: open-browser
 
+image:
+  file: .gitpod.Dockerfile
+
+github:
+  prebuilds:
+    master: true
+    pullRequests: true
+
+vscode:
+  extensions:
+    - golang.go
+
+workspaceLocation:
+  mattermost-gitpod-config/mattermost.code-workspace
+
 tasks:
   - name: Server
     before: |
@@ -72,15 +87,3 @@ tasks:
       source /workspace/mattermost-gitpod-config/scripts/app/init-app-project.sh
     command: |
       source /workspace/mattermost-gitpod-config/scripts/app/run-app-project.sh
-
-github:
-  prebuilds:
-    master: true
-    pullRequests: true
-
-vscode:
-  extensions:
-    - golang.go
-
-workspaceLocation:
-  mattermost-gitpod-config/mattermost.code-workspace
