@@ -21,5 +21,3 @@ RUN mkdir -p /workspace/persist/.cache/go-build
 ENV GOCACHE=/workspace/persist/.cache/go-build
 
 ENV MM_SERVICESETTINGS_ENABLEDEVELOPER=true
-
-RUN go get golang.org/x/sys
