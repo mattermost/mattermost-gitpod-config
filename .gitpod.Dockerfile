@@ -16,3 +16,8 @@ RUN sudo apt-get update \
    xauth \
    xvfb \
  && sudo rm -rf /var/lib/apt/lists/*
+
+RUN mkdir -p /workspace/persist/.cache/go-build
+ENV GOCACHE=/workspace/persist/.cache/go-build
+
+ENV MM_SERVICESETTINGS_ENABLEDEVELOPER=true
