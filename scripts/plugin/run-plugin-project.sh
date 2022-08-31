@@ -10,4 +10,4 @@ fi
 
 cd /workspace/$_repo
 
-MM_SERVICESETTINGS_ENABLEDEVELOPER=true make deploy
+make deploy

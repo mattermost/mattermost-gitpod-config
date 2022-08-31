@@ -19,4 +19,4 @@ cd $_repo
 
 node /workspace/mattermost-gitpod-config/scripts/common/add-workspace-folder.js $_repo
 
-MM_SERVICESETTINGS_ENABLEDEVELOPER=true make dist
+make dist

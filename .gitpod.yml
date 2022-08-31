@@ -66,7 +66,6 @@ tasks:
 
   - name: Plugin
     before: |
-      go get golang.org/x/sys
       nvm install || nvm install v13.14
     init: |
       source /workspace/mattermost-gitpod-config/scripts/plugin/init-plugin-project.sh
