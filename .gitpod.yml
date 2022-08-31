@@ -28,16 +28,11 @@ tasks:
       export MM_SERVICESETTINGS_SITEURL=$(gp url 8065)
     init: |
       go run ./build/docker-compose-generator/main.go postgres minio | docker-compose -f docker-compose.makefile.yml pull
-      go run ./build/docker-compose-generator/main.go postgres minio | docker-compose -f docker-compose.makefile.yml -f /dev/stdin run -T --rm start_dependencies
-      make run-server MM_NO_DOCKER=true
+      make run-server
       gp await-port 8065
       make stop-server
-      go run ./build/docker-compose-generator/main.go postgres minio | docker-compose -f docker-compose.makefile.yml -f /dev/stdin stop
-
     command: |
-      export MM_SERVICESETTINGS_SITEURL=$(gp url 8065)
-      go run ./build/docker-compose-generator/main.go postgres minio | docker-compose -f docker-compose.makefile.yml -f /dev/stdin run -T --rm start_dependencies
-      make run-server MM_NO_DOCKER=true
+      make run-server
     env:
       ENABLED_DOCKER_SERVICES: postgres minio
       MM_SERVICESETTINGS_ENABLELOCALMODE: true
@@ -56,23 +51,22 @@ tasks:
     before: |
       cd ../mattermost-webapp
       export MM_SERVICESETTINGS_SITEURL=$(gp url 8065)
+      nvm install v16.4.0
     init: |
       mkdir dist
       cd ../mattermost-server
       ln -nfs ../mattermost-webapp/dist client
       cd ../mattermost-webapp
-
-      nvm install v16.4.0
-      nvm alias default v16.4.0
       npm i
       make build
     command: |
-      nvm use v16.4.0
       npm i
       make run
     openMode: split-right
 
   - name: Plugin
+    before: |
+      nvm install || nvm install v13.14
     init: |
       source /workspace/mattermost-gitpod-config/scripts/plugin/init-plugin-project.sh
     command: |
