@@ -5,6 +5,7 @@ additionalRepositories:
 ports:
   - port: 8065
     onOpen: open-browser
+    visibility: public
 
 image:
   file: .gitpod.Dockerfile
