@@ -52,7 +52,7 @@ tasks:
     before: |
       cd ../mattermost-webapp
       export MM_SERVICESETTINGS_SITEURL=$(gp url 8065)
-      nvm install v16.4.0
+      nvm install
     init: |
       mkdir dist
       cd ../mattermost-server
