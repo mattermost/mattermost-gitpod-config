@@ -17,6 +17,8 @@ cd /workspace
 git clone $_cloneURL
 cd $_repo
 
+gp sync-done plugin-repo-cloned
+
 node /workspace/mattermost-gitpod-config/scripts/common/add-workspace-folder.js $_repo
 
 make dist
