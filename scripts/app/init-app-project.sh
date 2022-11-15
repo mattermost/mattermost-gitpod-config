@@ -8,6 +8,10 @@ if [[ "$_repo" != "mattermost-server" && "$_repo" != "mattermost-webapp" && "$_r
     _cloneURL="${_repoURL}.git"
     cd /workspace
     git clone $_cloneURL
+
+    revision=$(echo $GITPOD_WORKSPACE_CONTEXT | jq .ref -r)
+    git checkout $revision
+
     node /workspace/mattermost-gitpod-config/scripts/common/add-workspace-folder.js $_repo
 elif [[ "$_repo" == "mattermost-plugin"* ]]; then
     gp sync-await plugin-repo-cloned
