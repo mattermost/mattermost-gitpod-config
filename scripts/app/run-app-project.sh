@@ -5,5 +5,5 @@ _repo=$(echo $_contextURL | cut -d'/' -f 5)
 
 cd /workspace/$_repo
 
-test -x .gitpod/before.sh && source .gitpod/before.sh
-test -x .gitpod/command.sh && source .gitpod/command.sh
+source .gitpod/before.sh
+source .gitpod/command.sh

@@ -20,5 +20,5 @@ fi
 
 cd /workspace/$_repo
 
-test -x .gitpod/before.sh && source .gitpod/before.sh
-test -x .gitpod/init.sh && source .gitpod/init.sh
+source .gitpod/before.sh
+source .gitpod/init.sh
