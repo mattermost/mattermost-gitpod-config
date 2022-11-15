@@ -30,7 +30,7 @@ tasks:
     init: |
       go run ./build/docker-compose-generator/main.go postgres minio | docker-compose -f docker-compose.makefile.yml pull
       make run-server
-      gp await-port 8065
+      gp ports await 8065
       make stop-server
     command: |
       make run-server
@@ -71,7 +71,7 @@ tasks:
     init: |
       source /workspace/mattermost-gitpod-config/scripts/plugin/init-plugin-project.sh
     command: |
-      gp await-port 8065
+      gp ports await 8065
       echo "Server is running at $(gp url 8065)"
       source /workspace/mattermost-gitpod-config/scripts/plugin/run-plugin-project.sh
     env:

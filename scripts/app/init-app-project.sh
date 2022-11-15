@@ -3,23 +3,22 @@ _contextURL=$GITPOD_WORKSPACE_CONTEXT_URL
 
 _repo=$(echo $_contextURL | cut -d'/' -f 5)
 
-_repoPrefix="mattermost-app"
-if [[ "$_repo" == "$_repoPrefix"* ]]; then
+if [[ "$_repo" != "mattermost-server" && "$_repo" != "mattermost-webapp" && "$_repo" != "mattermost-gitpod-config" && "$_repo" != "mattermost-plugin"* ]]; then
     _repoURL=$(echo $_contextURL | cut -d'/' -f 1-5)
-else
-    echo "Not an Apps project."
-    exit 0
+    _cloneURL="${_repoURL}.git"
+    cd /workspace
+    git clone $_cloneURL
+
+    cd /workspace/$_repo
+    revision=$(echo $GITPOD_WORKSPACE_CONTEXT | jq .ref -r)
+    git checkout $revision
+
+    node /workspace/mattermost-gitpod-config/scripts/common/add-workspace-folder.js $_repo
+elif [[ "$_repo" == "mattermost-plugin"* ]]; then
+    gp sync-await plugin-repo-cloned
 fi
 
-_cloneURL="${_repoURL}.git"
+cd /workspace/$_repo
 
-cd /workspace
-git clone $_cloneURL
-cd $_repo
-
-node /workspace/mattermost-gitpod-config/scripts/common/add-workspace-folder.js $_repo
-
-cd ../$_repo
-source install.sh
-
-cd ../$_repo && source install.sh
+test -x .gitpod/before.sh && source .gitpod/before.sh
+test -x .gitpod/init.sh && source .gitpod/init.sh

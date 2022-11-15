@@ -3,12 +3,7 @@ _contextURL=$GITPOD_WORKSPACE_CONTEXT_URL
 
 _repo=$(echo $_contextURL | cut -d'/' -f 5)
 
-_repoPrefix="mattermost-app"
-if [[ "$_repo" != "$_repoPrefix"* ]]; then
-    echo "Not an Apps project. Doing nothing."
-    exit 0
-fi
-
 cd /workspace/$_repo
 
-cd ../$_repo && source run.sh
+test -x .gitpod/before.sh && source .gitpod/before.sh
+test -x .gitpod/command.sh && source .gitpod/command.sh
