@@ -9,6 +9,7 @@ if [[ "$_repo" != "mattermost-server" && "$_repo" != "mattermost-webapp" && "$_r
     cd /workspace
     git clone $_cloneURL
 
+    cd /workspace/$_repo
     revision=$(echo $GITPOD_WORKSPACE_CONTEXT | jq .ref -r)
     git checkout $revision
 
