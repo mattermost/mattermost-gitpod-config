@@ -20,4 +20,7 @@ RUN sudo apt-get update \
 RUN mkdir -p /workspace/persist/.cache/go-build
 ENV GOCACHE=/workspace/persist/.cache/go-build
 
+ENV GOBIN=/home/gitpod/go/bin
+RUN go install github.com/mattermost/mattermost-govet/v2@latest
+
 ENV MM_SERVICESETTINGS_ENABLEDEVELOPER=true
