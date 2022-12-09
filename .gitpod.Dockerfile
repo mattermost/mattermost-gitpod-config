@@ -20,6 +20,6 @@ RUN sudo apt-get update \
 RUN mkdir -p /workspace/persist/.cache/go-build
 ENV GOCACHE=/workspace/persist/.cache/go-build
 
-ENV GOBIN=/home/gitpod/go/bin
+ENV GOBIN=/workspace/go/bin
 
 ENV MM_SERVICESETTINGS_ENABLEDEVELOPER=true
