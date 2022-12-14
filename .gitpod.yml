@@ -3,7 +3,12 @@ additionalRepositories:
   - url: https://github.com/mattermost/mattermost-webapp
 
 ports:
+  # 8065 - for Mattermost instance
   - port: 8065
+    onOpen: open-browser
+    visibility: public
+  # 6080 - for noVNC instance (Cypress)
+  - port: 6080
     onOpen: open-browser
     visibility: public
 
@@ -41,6 +46,7 @@ tasks:
       MM_SERVICESETTINGS_ENABLEOAUTHSERVICEPROVIDER: true
       MM_SERVICESETTINGS_ENABLEDEVELOPER: true
       MM_SERVICESETTINGS_ENABLETESTING: true
+      MM_TEAMSETTINGS_ENABLEOPENSERVER: true
       MM_PLUGINSETTINGS_AUTOMATICPREPACKAGEDPLUGINS: true
       MM_PLUGINSETTINGS_ENABLEUPLOADS: true
       MM_EXPERIMENTALSETTINGS_ENABLEAPPBAR: true
