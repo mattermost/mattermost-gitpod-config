@@ -32,6 +32,8 @@ tasks:
       make run-server
       gp ports await 8065
       make stop-server
+      make test-data
+      echo "Server built"
     command: |
       make run-server
     env:
@@ -53,6 +55,8 @@ tasks:
       cd ../mattermost-webapp
       export MM_SERVICESETTINGS_SITEURL=$(gp url 8065)
       nvm install
+      nvm alias default $(cat .nvmrc)
+      echo "nvm use default" >> ~/.bashrc
     init: |
       mkdir dist
       cd ../mattermost-server
@@ -60,16 +64,23 @@ tasks:
       cd ../mattermost-webapp
       npm i
       make build
+      echo "Webapp built"
     command: |
       npm i
       make run
     openMode: split-right
+
+  - name: Cypress
+    init: |
+      cd ../mattermost-webapp/e2e/cypress
+      npm i
 
   - name: Plugin
     before: |
       nvm install || nvm install v13.14
     init: |
       source /workspace/mattermost-gitpod-config/scripts/plugin/init-plugin-project.sh
+      echo "Plugin built"
     command: |
       gp ports await 8065
       echo "Server is running at $(gp url 8065)"
@@ -77,8 +88,9 @@ tasks:
     env:
       MM_SERVICESETTINGS_ENABLEDEVELOPER: true
 
-  - name: App
+  - name: Project
     init: |
       source /workspace/mattermost-gitpod-config/scripts/app/init-app-project.sh
+      echo "Project built"
     command: |
       source /workspace/mattermost-gitpod-config/scripts/app/run-app-project.sh
