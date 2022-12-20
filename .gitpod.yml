@@ -3,12 +3,10 @@ additionalRepositories:
   - url: https://github.com/mattermost/mattermost-webapp
 
 ports:
-  # 8065 - for Mattermost instance
   - port: 8065
-    description: 8065 - for Mattermost instance
+    description: for Mattermost instance
     onOpen: open-browser
     visibility: public
-  # 6080 - for noVNC instance (Cypress)
   - port: 6080
     description: for noVNC instance (Cypress)
     onOpen: notify
