@@ -1,7 +1,12 @@
 _contextURL=$GITPOD_WORKSPACE_CONTEXT_URL
+_contextURL=https://github.com/mattermost/mattermost-plugin-jira/pull/881
 
 _repo=$(echo $_contextURL | cut -d'/' -f 5)
 _repoToCheckout=$_repo
+
+echo $_contextURL
+echo $_repo
+echo $_repoToCheckout
 
 _pluginRepoPrefix="mattermost-plugin"
 if [[ "$_repo" == "$_pluginRepoPrefix"* ]]; then
