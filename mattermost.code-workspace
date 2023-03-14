@@ -7,8 +7,11 @@
             "path": "../mattermost-server"
         },
         {
-            "path": "../mattermost-webapp"
-        }
+            "path": "../mattermost-server/server"
+        },
+        {
+            "path": "../mattermost-server/webapp"
+        },
     ],
     "settings": {}
 }

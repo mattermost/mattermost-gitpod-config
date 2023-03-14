@@ -68,9 +68,9 @@ tasks:
       nvm alias default $(cat .nvmrc)
       echo "nvm use default" >> ~/.bashrc
     init: |
-      mkdir dist
+      mkdir -p channels/dist
       cd ../server
-      ln -nfs ../webapp/dist client
+      ln -nfs ../webapp/channels/dist client
       cd ../webapp
       npm i
       make build
