@@ -1,6 +1,5 @@
 additionalRepositories:
-  - url: https://github.com/mattermost/mattermost-server
-  - url: https://github.com/mattermost/mattermost-webapp
+  - url: https://github.com/mickmister/mattermost-server
 
 ports:
   - port: 8065
@@ -35,7 +34,7 @@ workspaceLocation:
 tasks:
   - name: Server
     before: |
-      cd ../mattermost-server
+      cd ../mattermost-server/server
       export MM_SERVICESETTINGS_SITEURL=$(gp url 8065)
     init: |
       go run ./build/docker-compose-generator/main.go postgres minio | docker-compose -f docker-compose.makefile.yml pull
@@ -63,16 +62,16 @@ tasks:
 
   - name: Webapp
     before: |
-      cd ../mattermost-webapp
+      cd ../mattermost-server/webapp
       export MM_SERVICESETTINGS_SITEURL=$(gp url 8065)
       nvm install
       nvm alias default $(cat .nvmrc)
       echo "nvm use default" >> ~/.bashrc
     init: |
       mkdir dist
-      cd ../mattermost-server
-      ln -nfs ../mattermost-webapp/dist client
-      cd ../mattermost-webapp
+      cd ../server
+      ln -nfs ../webapp/dist client
+      cd ../webapp
       npm i
       make build
       echo "Webapp built"
@@ -83,7 +82,7 @@ tasks:
 
   - name: Cypress
     init: |
-      cd ../mattermost-webapp/e2e/cypress
+      cd mattermost-server/webapp/e2e/cypress
       npm i
 
   - name: Plugin
