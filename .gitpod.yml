@@ -85,6 +85,12 @@ tasks:
       cd mattermost-server/webapp/e2e/cypress
       npm i
 
+  - name: Playwright
+    init: |
+      cd mattermost-server/webapp/e2e/cypress
+      npm i
+      npx playwright install
+
   - name: Plugin
     before: |
       nvm install || nvm install v13.14

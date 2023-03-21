@@ -1,16 +1,24 @@
 {
     "folders": [
         {
-            "path": "."
+            "path": "../mattermost-server",
+            "name": "Root"
         },
         {
-            "path": "../mattermost-server"
+            "path": "../mattermost-server/server",
+            "name": "Server"
         },
         {
-            "path": "../mattermost-server/server"
+            "path": "../mattermost-server/webapp",
+            "name": "Webapp"
         },
         {
-            "path": "../mattermost-server/webapp"
+            "path": "../mattermost-server/webapp/channels/e2e/cypress",
+            "name": "Cypress"
+        },
+        {
+            "path": "../mattermost-server/webapp/channels/e2e/playwright",
+            "name": "Playwright"
         },
     ],
     "settings": {}
