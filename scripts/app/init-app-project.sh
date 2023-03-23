@@ -16,6 +16,8 @@ if [[ "$_repo" != "mattermost-server" && "$_repo" != "mattermost-webapp" && "$_r
     node /workspace/mattermost-gitpod-config/scripts/common/add-workspace-folder.js $_repo
 elif [[ "$_repo" == "mattermost-plugin"* ]]; then
     gp sync-await plugin-repo-cloned
+else
+    exit
 fi
 
 cd /workspace/$_repo
