@@ -13,11 +13,11 @@
             "name": "Webapp"
         },
         {
-            "path": "../mattermost-server/webapp/channels/e2e/cypress",
+            "path": "../mattermost-server/e2e/cypress",
             "name": "Cypress"
         },
         {
-            "path": "../mattermost-server/webapp/channels/e2e/playwright",
+            "path": "../mattermost-server/e2e/playwright",
             "name": "Playwright"
         },
     ],
