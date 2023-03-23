@@ -82,12 +82,12 @@ tasks:
 
   - name: Cypress
     init: |
-      cd mattermost-server/webapp/e2e/cypress
+      cd ../mattermost-server/e2e/cypress
       npm i
 
   - name: Playwright
     init: |
-      cd mattermost-server/webapp/e2e/cypress
+      cd ../mattermost-server/e2e/playwright
       npm i
       npx playwright install
 
