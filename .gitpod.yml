@@ -87,7 +87,7 @@ tasks:
 
   - name: Playwright
     init: |
-      cd ../mattermost-server/e2e/cypress
+      cd ../mattermost-server/e2e/playwright
       npm i
       npx playwright install
 
