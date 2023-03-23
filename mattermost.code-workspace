@@ -19,7 +19,7 @@
         {
             "path": "../mattermost-server/e2e/playwright",
             "name": "Playwright"
-        },
+        }
     ],
     "settings": {}
 }
