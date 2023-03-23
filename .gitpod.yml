@@ -1,5 +1,5 @@
 additionalRepositories:
-  - url: https://github.com/mickmister/mattermost-server
+  - url: https://github.com/mattermost/mattermost-server
 
 ports:
   - port: 8065
