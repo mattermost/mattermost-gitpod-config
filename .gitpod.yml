@@ -36,6 +36,8 @@ tasks:
     before: |
       cd ../mattermost-server/server
       export MM_SERVICESETTINGS_SITEURL=$(gp url 8065)
+      export MM_BOARDS_DEV_SERVER_URL=$(gp url 9006)
+      export MM_PLAYBOOKS_DEV_SERVER_URL=$(gp url 9007)
     init: |
       go run ./build/docker-compose-generator/main.go postgres minio | docker-compose -f docker-compose.makefile.yml pull
       make run-server
@@ -64,6 +66,8 @@ tasks:
     before: |
       cd ../mattermost-server/webapp
       export MM_SERVICESETTINGS_SITEURL=$(gp url 8065)
+      export MM_BOARDS_DEV_SERVER_URL=$(gp url 9006)
+      export MM_PLAYBOOKS_DEV_SERVER_URL=$(gp url 9007)
       nvm install
       nvm alias default $(cat .nvmrc)
       echo "nvm use default" >> ~/.bashrc
