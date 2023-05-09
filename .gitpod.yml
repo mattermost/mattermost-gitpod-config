@@ -23,6 +23,7 @@ github:
   prebuilds:
     master: true
     pullRequests: true
+    addCheck: false
 
 vscode:
   extensions:
