@@ -74,7 +74,6 @@ tasks:
       ln -nfs ../webapp/channels/dist client
       cd ../webapp
       npm i
-      make build
       echo "Webapp built"
     command: |
       npm i
