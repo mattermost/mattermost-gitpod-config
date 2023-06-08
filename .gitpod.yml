@@ -1,5 +1,5 @@
 additionalRepositories:
-  - url: https://github.com/mattermost/mattermost-server
+  - url: https://github.com/mattermost/mattermost
 
 ports:
   - port: 8065
@@ -35,7 +35,7 @@ workspaceLocation:
 tasks:
   - name: Server
     before: |
-      cd ../mattermost-server/server
+      cd ../mattermost/server
       export MM_SERVICESETTINGS_SITEURL=$(gp url 8065)
     init: |
       go run ./build/docker-compose-generator/main.go postgres minio | docker-compose -f docker-compose.makefile.yml pull
@@ -63,7 +63,7 @@ tasks:
 
   - name: Webapp
     before: |
-      cd ../mattermost-server/webapp
+      cd ../mattermost/webapp
       export MM_SERVICESETTINGS_SITEURL=$(gp url 8065)
       nvm install
       nvm alias default $(cat .nvmrc)
@@ -82,12 +82,12 @@ tasks:
 
   - name: Cypress
     init: |
-      cd ../mattermost-server/e2e-tests/cypress
+      cd ../mattermost/e2e-tests/cypress
       npm i
 
   - name: Playwright
     init: |
-      cd ../mattermost-server/e2e-tests/playwright
+      cd ../mattermost/e2e-tests/playwright
       npm i
       npx playwright install
 
