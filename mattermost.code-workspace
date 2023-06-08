@@ -1,23 +1,23 @@
 {
     "folders": [
         {
-            "path": "../mattermost-server",
+            "path": "../mattermost",
             "name": "Root"
         },
         {
-            "path": "../mattermost-server/server",
+            "path": "../mattermost/server",
             "name": "Server"
         },
         {
-            "path": "../mattermost-server/webapp",
+            "path": "../mattermost/webapp",
             "name": "Webapp"
         },
         {
-            "path": "../mattermost-server/e2e-tests/cypress",
+            "path": "../mattermost/e2e-tests/cypress",
             "name": "Cypress"
         },
         {
-            "path": "../mattermost-server/e2e-tests/playwright",
+            "path": "../mattermost/e2e-tests/playwright",
             "name": "Playwright"
         }
     ],
