@@ -21,5 +21,6 @@ RUN mkdir -p /workspace/persist/.cache/go-build
 ENV GOCACHE=/workspace/persist/.cache/go-build
 
 ENV GOBIN=/workspace/mattermost/server/bin
+ENV GO=/workspace/server/go
 
 ENV MM_SERVICESETTINGS_ENABLEDEVELOPER=true
