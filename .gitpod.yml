@@ -37,7 +37,7 @@ tasks:
   - name: Server
     before: |
       npm i -g markserv
-      markserve ./welcome.md -p 9000 &
+      markserv ./welcome.md -p 9000 &
       cd ../mattermost/server
       export MM_SERVICESETTINGS_SITEURL=$(gp url 8065)
     init: |
