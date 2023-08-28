@@ -6,6 +6,8 @@ ports:
     description: for Mattermost instance
     onOpen: open-browser
     visibility: public
+  - port: 9000
+    description: for Mattermost + Gitpod welcome message
   - port: 6080
     description: for noVNC instance (Cypress)
     onOpen: notify
@@ -29,12 +31,13 @@ vscode:
   extensions:
     - golang.go
 
-workspaceLocation:
-  mattermost-gitpod-config/mattermost.code-workspace
+workspaceLocation: mattermost-gitpod-config/mattermost.code-workspace
 
 tasks:
   - name: Server
     before: |
+      npm i -g markserv
+      markserve ./welcome.md -p 9000 &
       cd ../mattermost/server
       export MM_SERVICESETTINGS_SITEURL=$(gp url 8065)
     init: |
