@@ -40,7 +40,7 @@ tasks:
     before: |
       npm i -g markserv
       markserv -p 9000 &
-      gp open "$(gp url 9000)/welcome.md"
+      gp preview "$(gp url 9000)/welcome.md"
       cd workspace/mattermost/server
       export MM_SERVICESETTINGS_SITEURL=$(gp url 8065)
     init: |
