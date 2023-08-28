@@ -8,6 +8,8 @@ ports:
     visibility: public
   - port: 9000
     description: for Mattermost + Gitpod welcome message
+    onOpen: open-browser
+    visibility: public
   - port: 6080
     description: for noVNC instance (Cypress)
     onOpen: notify
@@ -37,8 +39,9 @@ tasks:
   - name: Server
     before: |
       npm i -g markserv
-      markserv ./welcome.md -p 9000 &
-      cd ../mattermost/server
+      markserv -p 9000 &
+      gp open "$(gp url 9000)/welcome.md"
+      cd workspace/mattermost/server
       export MM_SERVICESETTINGS_SITEURL=$(gp url 8065)
     init: |
       go run ./build/docker-compose-generator/main.go postgres minio | docker-compose -f docker-compose.makefile.yml pull
