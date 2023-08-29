@@ -39,6 +39,7 @@ tasks:
       npm i -g markserv
     command: |
       markserv -p 9000 welcome.md
+
   - name: Server
     before: |
       cd workspace/mattermost/server
