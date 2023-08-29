@@ -38,7 +38,8 @@ tasks:
     init: |
       npm i -g markserv
     command: |
-      markserv -p 9000 welcome.md
+      markserv -p 9000 &
+      gp preview "$(gp url 9000)/welcome.md"
 
   - name: Server
     before: |
