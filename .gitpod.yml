@@ -38,10 +38,13 @@ workspaceLocation: mattermost-gitpod-config/mattermost.code-workspace
 tasks:
   - name: Server
     before: |
+  - name: Welcome
+    init: |
       npm i -g markserv
+    command: |
       markserv -p 9000 &
       gp preview "$(gp url 9000)/welcome.md"
-      cd workspace/mattermost/server
+      exit
       export MM_SERVICESETTINGS_SITEURL=$(gp url 8065)
     init: |
       go run ./build/docker-compose-generator/main.go postgres minio | docker-compose -f docker-compose.makefile.yml pull
