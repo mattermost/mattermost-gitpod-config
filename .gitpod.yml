@@ -8,7 +8,7 @@ ports:
     visibility: public
   - port: 9000
     description: for Mattermost + Gitpod welcome message
-    onOpen: open-preview
+    onOpen: ignore
     visibility: public
   - port: 6080
     description: for noVNC instance (Cypress)
