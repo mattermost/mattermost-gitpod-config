@@ -20,7 +20,6 @@ RUN sudo apt-get update \
 RUN mkdir -p /workspace/persist/.cache/go-build
 ENV GOCACHE=/workspace/persist/.cache/go-build
 
-ENV GOBIN=/workspace/mattermost/server/bin
-ENV GO=/workspace/mattermost/server/go
-
 ENV MM_SERVICESETTINGS_ENABLEDEVELOPER=true
+
+RUN alias mmctl="/workspace/mattermost/server/bin/mmctl"
