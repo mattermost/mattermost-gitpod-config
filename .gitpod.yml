@@ -44,7 +44,6 @@ tasks:
       cd /workspace/mattermost/server
       export MM_SERVICESETTINGS_SITEURL=$(gp url 8065)
     init: |
-      go run ./build/docker-compose-generator/main.go postgres minio | docker-compose -f docker-compose.makefile.yml pull
       make run-server
       gp ports await 8065
       make stop-server
@@ -52,20 +51,6 @@ tasks:
       echo "Server built"
     command: |
       make run-server
-    env:
-      ENABLED_DOCKER_SERVICES: postgres minio
-      MM_SERVICESETTINGS_ENABLELOCALMODE: true
-      MM_SERVICESETTINGS_ENABLEBOTACCOUNTCREATION: true
-      MM_SERVICESETTINGS_ENABLEOAUTHSERVICEPROVIDER: true
-      MM_SERVICESETTINGS_ENABLEDEVELOPER: true
-      MM_SERVICESETTINGS_ENABLETESTING: true
-      MM_TEAMSETTINGS_ENABLEOPENSERVER: true
-      MM_PLUGINSETTINGS_AUTOMATICPREPACKAGEDPLUGINS: true
-      MM_PLUGINSETTINGS_ENABLEUPLOADS: true
-      MM_EXPERIMENTALSETTINGS_ENABLEAPPBAR: true
-      MM_FEATUREFLAGS_AppsEnabled: true
-      MM_LOGSETTINGS_CONSOLELEVEL: DEBUG
-      MM_LOGSETTINGS_FILELEVEL: DEBUG
 
   - name: Webapp
     before: |
