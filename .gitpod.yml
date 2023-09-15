@@ -6,14 +6,15 @@ ports:
     description: for Mattermost instance
     onOpen: open-browser
     visibility: public
+  - port: 9000
+    description: for Mattermost + Gitpod welcome message
+    onOpen: ignore
   - port: 6080
     description: for noVNC instance (Cypress)
     onOpen: notify
   - port: 5432
     onOpen: ignore
   - port: 5900
-    onOpen: ignore
-  - port: 9000
     onOpen: ignore
 
 image:
@@ -29,13 +30,18 @@ vscode:
   extensions:
     - golang.go
 
-workspaceLocation:
-  mattermost-gitpod-config/mattermost.code-workspace
+workspaceLocation: mattermost-gitpod-config/mattermost.code-workspace
 
 tasks:
+  - name: Welcome
+    command: |
+      markserv -p 9000 --browser false &
+      sleep 2
+      gp preview "$(gp url 9000)/welcome.md"
+
   - name: Server
     before: |
-      cd ../mattermost/server
+      cd /workspace/mattermost/server
       export MM_SERVICESETTINGS_SITEURL=$(gp url 8065)
     init: |
       go run ./build/docker-compose-generator/main.go postgres minio | docker-compose -f docker-compose.makefile.yml pull
@@ -63,7 +69,7 @@ tasks:
 
   - name: Webapp
     before: |
-      cd ../mattermost/webapp
+      cd /workspace/mattermost/webapp
       export MM_SERVICESETTINGS_SITEURL=$(gp url 8065)
       nvm install
       nvm alias default $(cat .nvmrc)
@@ -82,12 +88,12 @@ tasks:
 
   - name: Cypress
     init: |
-      cd ../mattermost/e2e-tests/cypress
+      cd /workspace/mattermost/e2e-tests/cypress
       npm i
 
   - name: Playwright
     init: |
-      cd ../mattermost/e2e-tests/playwright
+      cd /workspace/mattermost/e2e-tests/playwright
       npm i
       npx playwright install
 
