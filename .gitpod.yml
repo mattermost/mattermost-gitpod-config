@@ -41,7 +41,7 @@ tasks:
 
   - name: Server
     before: |
-      cd workspace/mattermost/server
+      cd /workspace/mattermost/server
       export MM_SERVICESETTINGS_SITEURL=$(gp url 8065)
     init: |
       go run ./build/docker-compose-generator/main.go postgres minio | docker-compose -f docker-compose.makefile.yml pull
@@ -69,7 +69,7 @@ tasks:
 
   - name: Webapp
     before: |
-      cd ../mattermost/webapp
+      cd /workspace/mattermost/webapp
       export MM_SERVICESETTINGS_SITEURL=$(gp url 8065)
       nvm install
       nvm alias default $(cat .nvmrc)
@@ -88,12 +88,12 @@ tasks:
 
   - name: Cypress
     init: |
-      cd ../mattermost/e2e-tests/cypress
+      cd /workspace/mattermost/e2e-tests/cypress
       npm i
 
   - name: Playwright
     init: |
-      cd ../mattermost/e2e-tests/playwright
+      cd /workspace/mattermost/e2e-tests/playwright
       npm i
       npx playwright install
 
