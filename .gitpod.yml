@@ -9,7 +9,6 @@ ports:
   - port: 9000
     description: for Mattermost + Gitpod welcome message
     onOpen: ignore
-    visibility: public
   - port: 6080
     description: for noVNC instance (Cypress)
     onOpen: notify
@@ -35,11 +34,10 @@ workspaceLocation: mattermost-gitpod-config/mattermost.code-workspace
 
 tasks:
   - name: Welcome
-    init: |
-      npm i -g markserv
     command: |
-      markserv -p 9000 &
-      gp preview "$(gp url 9000)/welcome.md"
+      markserv -p 9000 --browser false welcome.md &
+      sleep 2
+      gp preview $(gp url 9000)
 
   - name: Server
     before: |
