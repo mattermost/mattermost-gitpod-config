@@ -35,9 +35,9 @@ workspaceLocation: mattermost-gitpod-config/mattermost.code-workspace
 tasks:
   - name: Welcome
     command: |
-      markserv -p 9000 --browser false welcome.md &
+      markserv -p 9000 --browser false &
       sleep 2
-      gp preview $(gp url 9000)
+      gp preview "$(gp url 9000)/welcome.md"
 
   - name: Server
     before: |
