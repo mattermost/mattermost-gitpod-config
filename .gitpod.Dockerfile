@@ -22,4 +22,4 @@ ENV GOCACHE=/workspace/persist/.cache/go-build
 
 ENV MM_SERVICESETTINGS_ENABLEDEVELOPER=true
 
-RUN alias mmctl="/workspace/mattermost/server/bin/mmctl"
+ENV PATH="${PATH}:/workspace/mattermost/server/bin"
