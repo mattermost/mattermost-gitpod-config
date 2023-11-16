@@ -29,6 +29,7 @@ github:
 vscode:
   extensions:
     - golang.go
+    - dbaeumer.vscode-eslint
 
 workspaceLocation: mattermost-gitpod-config/mattermost.code-workspace
 
