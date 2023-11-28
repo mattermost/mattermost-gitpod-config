@@ -12,3 +12,10 @@ We're setting up your environment in the terminals below 👇
 You can also check out these videos to learn how to work with Gitpod (and write an E2E test):
 - [How to set up a developer environment for Mattermost with Gitpod](https://www.youtube.com/watch?v=LgQ2Z_GelYQ)
 - [Writing your first E2E test for Mattermost](https://www.youtube.com/watch?v=mLbzKSGZv4A).
+
+---
+
+Once the webapp is done compiling and the Mattermost server is running, you can login with the following credentials:
+
+- Username: sysadmin
+- Password: Sys@dmin-sample1
