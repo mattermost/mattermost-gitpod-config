@@ -19,6 +19,11 @@ RUN sudo apt-get update \
 
 RUN npm i -g markserv
 
+RUN curl -L https://go.dev/dl/go1.22.1.linux-amd64.tar.gz -o go.tar.gz
+RUN rm -rf /home/gitpod/go
+RUN sudo tar -C /home/gitpod -xzf go.tar.gz
+RUN rm go.tar.gz
+
 RUN mkdir -p /workspace/persist/.cache/go-build
 ENV GOCACHE=/workspace/persist/.cache/go-build
 
