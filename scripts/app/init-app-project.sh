@@ -22,5 +22,5 @@ fi
 
 cd /workspace/$_repo
 
-source .gitpod/before.sh
-source .gitpod/init.sh
+if [ -f .gitpod/before.sh ]; then source .gitpod/before.sh; fi
+if [ -f .gitpod/init.sh ]; then source .gitpod/init.sh; fi
